@@ -24,7 +24,7 @@ public class UserTest
 	@Test
 	public void addUser()
 	{
-		User u=new User(0,"sagar","sagar@gmail.com","sagar@123");
+		User u=new User(0,"sagar","sagar@gmail.com","sagar@123","admin",true);
 		assertEquals(true, userService.addUser(u)); 
 	}
 }

@@ -25,19 +25,8 @@ public class PizzaDAOImpl implements PizzaDAO
 	@Override
 	public boolean addPizza(Pizza pizza) 
 	{
-		try
-		{
-			Session session=sessionFactory.openSession();
-			Transaction tx=session.beginTransaction();
-			session.save(pizza);
-			tx.commit();
-			return true;
-		}
-		catch (Exception e) 
-		{
-			System.out.println(e);
-			return false;
-		}
+		sessionFactory.getCurrentSession().save(pizza);
+		return true;
 	}
 
 	@Override
@@ -48,15 +37,11 @@ public class PizzaDAOImpl implements PizzaDAO
 			Pizza pizza=new Pizza();
 			pizza.setPizzaid(pizzaid);
 			
-			Session session=sessionFactory.getCurrentSession();
-			Transaction tx=session.beginTransaction();
-			session.delete(pizza);
-			tx.commit();
+			sessionFactory.getCurrentSession().delete(pizza);
 			return true;
 		}
 		catch (Exception e) 
 		{
-			System.out.println(e);
 			return false;
 		}
 	}
@@ -66,10 +51,7 @@ public class PizzaDAOImpl implements PizzaDAO
 	{
 		try
 		{
-			Session session=sessionFactory.getCurrentSession();
-			Transaction tx=session.beginTransaction();
-			session.update(pizza);
-			tx.commit();
+			sessionFactory.getCurrentSession().update(pizza);
 			return true;
 		}
 		catch (Exception e) 
@@ -91,6 +73,7 @@ public class PizzaDAOImpl implements PizzaDAO
 		catch(Exception e)
 		{
 			System.out.println(e);
+			
 			return null;
 		}
 	}

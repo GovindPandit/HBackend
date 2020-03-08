@@ -3,6 +3,7 @@ package com.niit.serviceimpl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.niit.dao.UserDAO;
@@ -18,7 +19,9 @@ public class UserServiceImpl implements UserService
 	@Override
 	public boolean addUser(User user) 
 	{
-		
+		user.setAuthority("user");
+		user.setEnabled(true);
+		user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
 		return userDAO.addUser(user);
 	}
 

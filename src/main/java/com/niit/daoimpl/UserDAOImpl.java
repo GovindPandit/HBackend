@@ -9,6 +9,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 import com.niit.dao.UserDAO;
@@ -25,10 +26,7 @@ public class UserDAOImpl implements UserDAO
 	{
 		try
 		{
-			Session session=sessionFactory.openSession();
-			Transaction tx=session.beginTransaction();
-			session.save(user);
-			tx.commit();
+			sessionFactory.getCurrentSession().save(user);
 			return true;
 		}
 		catch (Exception e) 
@@ -46,10 +44,7 @@ public class UserDAOImpl implements UserDAO
 			User user=new User();
 			user.setUserid(userid);
 			
-			Session session=sessionFactory.getCurrentSession();
-			Transaction tx=session.beginTransaction();
-			session.delete(user);
-			tx.commit();
+			sessionFactory.getCurrentSession().delete(user);
 			return true;
 		}
 		catch (Exception e) 
@@ -63,10 +58,7 @@ public class UserDAOImpl implements UserDAO
 	{
 		try
 		{
-			Session session=sessionFactory.getCurrentSession();
-			Transaction tx=session.beginTransaction();
-			session.update(user);
-			tx.commit();
+			sessionFactory.getCurrentSession().update(user);
 			return true;
 		}
 		catch (Exception e) 
