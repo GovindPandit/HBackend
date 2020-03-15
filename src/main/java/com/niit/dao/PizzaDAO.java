@@ -10,7 +10,7 @@ public interface PizzaDAO
 	public boolean addPizza(Pizza pizza);
 	public boolean deletePizza(int pizzaid);
 	public boolean updatePizza(Pizza pizza);
-	public Pizza displayPizzaByName(String name);
+	public List<Pizza> displayPizzaByName(String name);
 	public Pizza displayPizzaById(int pizzaid);
 	public List<Pizza> displayAllPizza();
 }

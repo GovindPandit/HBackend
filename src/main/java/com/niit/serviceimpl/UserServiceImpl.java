@@ -7,6 +7,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.niit.dao.UserDAO;
+import com.niit.email.Email;
 import com.niit.model.User;
 import com.niit.service.UserService;
 
@@ -22,7 +23,24 @@ public class UserServiceImpl implements UserService
 		user.setAuthority("user");
 		user.setEnabled(true);
 		user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
-		return userDAO.addUser(user);
+		boolean status=userDAO.addUser(user);
+		if(status)
+		{
+			try
+			{
+				Email email=new Email(user.getEmail(),"Registered Successfully!", "Welcome To Pizzeria!!!");
+				email.sendEmail();
+			}
+			catch(Exception e)
+			{
+				System.out.println(e);
+			}
+		}
+		else
+		{
+			return false;
+		}
+		return status;
 	}
 
 	@Override

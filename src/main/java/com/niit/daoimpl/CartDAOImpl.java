@@ -31,7 +31,10 @@ public class CartDAOImpl implements CartDAO
 	@Override
 	public boolean deleteCartItem(int cartItemId) 
 	{
-		sessionFactory.getCurrentSession().delete(cartItemId);
+		CartItem cartItem=new CartItem();
+		cartItem.setCartItemId(cartItemId);
+		
+		sessionFactory.getCurrentSession().delete(cartItem);
 		return true;
 	}
 

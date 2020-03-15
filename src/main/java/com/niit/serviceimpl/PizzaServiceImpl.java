@@ -35,7 +35,7 @@ public class PizzaServiceImpl implements PizzaService
 	}
 
 	@Override
-	public Pizza displayPizzaByName(String name) 
+	public List<Pizza> displayPizzaByName(String name) 
 	{
 		return pizzaDAO.displayPizzaByName(name);
 	}

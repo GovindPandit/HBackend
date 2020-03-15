@@ -23,8 +23,18 @@ public class Pizza
 	private String pizzaName;
 	private float price;
 	private int quantity;
+	private String imagelink;
+	
+	public String getImagelink() {
+		return imagelink;
+	}
+
+	public void setImagelink(String imagelink) {
+		this.imagelink = imagelink;
+	}
 	@Column(columnDefinition="TEXT")
 	private String description;
+	
 	
 	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy = "pizza")
 	private List<CartItem> cartItems;

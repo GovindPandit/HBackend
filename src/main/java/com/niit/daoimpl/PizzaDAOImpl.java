@@ -62,13 +62,13 @@ public class PizzaDAOImpl implements PizzaDAO
 	}
 
 	@Override
-	public Pizza displayPizzaByName(String name) 
+	public List<Pizza> displayPizzaByName(String name) 
 	{
 		try
 		{
 			Session session=sessionFactory.getCurrentSession();
-			Query query=session.createQuery("from Pizza where pizzaName= :pn");
-			return (Pizza)query.setParameter("pn", name).getResultList().get(0);
+			Query query=session.createQuery("from Pizza where pizzaName like  :pn");
+			return query.setParameter("pn", "%"+name+"%").getResultList();
 		}
 		catch(Exception e)
 		{
